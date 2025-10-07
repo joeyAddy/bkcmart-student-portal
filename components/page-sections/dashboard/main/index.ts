@@ -1,0 +1,9 @@
+export { DashboardMain } from "./dashboard-main";
+export { StatsCards } from "./stats-cards";
+export { StatCard } from "./stat-card";
+export { StudyStatistics } from "./study-statistics";
+export { RecentActivity } from "./recent-activity";
+export { CourseActivityCard } from "./course-activity-card";
+export { RightSidebar } from "./right-sidebar";
+export { AssignmentCard } from "./assignment-card";
+export { ProgressChart } from "./progress-chart";
