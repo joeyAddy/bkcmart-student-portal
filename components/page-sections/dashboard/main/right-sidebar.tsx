@@ -50,7 +50,12 @@ export function RightSidebar() {
       <div className="bg-card rounded-xl border p-4">
         <div className="flex items-center justify-between mb-4">
           <h4 className="font-medium">Assignments</h4>
-          <Button variant="link" size="sm" asChild className="h-auto p-0">
+          <Button
+            variant="link"
+            size="sm"
+            asChild
+            className="h-auto font-semibold p-0"
+          >
             <Link href="/assignments">See All</Link>
           </Button>
         </div>

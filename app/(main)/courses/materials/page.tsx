@@ -1,3 +1,4 @@
+import { AllMaterialsSection } from "@/components/page-sections/materials/all-materials-section";
 import { Page } from "@/components/page-template";
 
 export default function CourseMaterialsPage() {
@@ -5,6 +6,8 @@ export default function CourseMaterialsPage() {
     <Page
       title="Course Materials"
       description="Access textbooks, readings, and course resources"
-    />
+    >
+      <AllMaterialsSection />
+    </Page>
   );
 }

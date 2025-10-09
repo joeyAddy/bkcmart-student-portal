@@ -34,7 +34,7 @@ export function UpcomingClasses() {
     <div className="bg-card rounded-xl border p-6">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold">Upcoming Classes</h3>
-        <button className="text-sm text-primary hover:underline">
+        <button className="text-sm font-semibold text-primary hover:underline">
           View All Classes
         </button>
       </div>

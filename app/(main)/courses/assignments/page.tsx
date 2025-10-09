@@ -1,3 +1,4 @@
+import { AllAssignmentsSection } from "@/components/page-sections/assignments/all-assignments-section";
 import { Page } from "@/components/page-template";
 
 export default function AssignmentsPage() {
@@ -5,6 +6,8 @@ export default function AssignmentsPage() {
     <Page
       title="Assignments"
       description="View, submit, and track your course assignments"
-    />
+    >
+      <AllAssignmentsSection />
+    </Page>
   );
 }

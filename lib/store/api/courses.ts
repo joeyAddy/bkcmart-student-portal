@@ -241,3 +241,193 @@ export const {
   useArchiveCourseMutation,
   useGetCoursesByDepartmentQuery,
 } = coursesApi;
+
+// Additional types for student course enrollment
+export interface StudentCourse {
+  id: string;
+  code: string;
+  name: string;
+  instructor: string;
+  credits: number;
+  status: "ENROLLED" | "IN_PROGRESS" | "COMPLETED" | "DROPPED";
+  grade?: string;
+  progress: number;
+  schedule: {
+    days: string[];
+    time: string;
+    location: string;
+  };
+  semester: string;
+  year: number;
+  category: string;
+  enrollmentDate: string;
+  nextAssignment?: {
+    title: string;
+    dueDate: string;
+  };
+}
+
+// Mock student courses data
+const mockStudentCoursesData: StudentCourse[] = [
+  {
+    id: "1",
+    code: "CS101",
+    name: "Introduction to Computer Science",
+    instructor: "Dr. Sarah Johnson",
+    credits: 3,
+    status: "IN_PROGRESS",
+    grade: "A-",
+    progress: 75,
+    schedule: {
+      days: ["Mon", "Wed", "Fri"],
+      time: "9:00 AM - 10:30 AM",
+      location: "Zoom Meeting ID: 123-456-789",
+    },
+    semester: "Fall",
+    year: 2025,
+    category: "Computer Science",
+    enrollmentDate: "2025-08-15",
+    nextAssignment: {
+      title: "Binary Search Algorithm Implementation",
+      dueDate: "Oct 15, 2025",
+    },
+  },
+  {
+    id: "2",
+    code: "MATH201",
+    name: "Calculus II",
+    instructor: "Prof. Michael Chen",
+    credits: 4,
+    status: "IN_PROGRESS",
+    progress: 60,
+    schedule: {
+      days: ["Tue", "Thu"],
+      time: "2:00 PM - 3:30 PM",
+      location: "Google Meet: meet.google.com/abc-defg-hij",
+    },
+    semester: "Fall",
+    year: 2025,
+    category: "Mathematics",
+    enrollmentDate: "2025-08-15",
+    nextAssignment: {
+      title: "Integration by Parts Problem Set",
+      dueDate: "Oct 12, 2025",
+    },
+  },
+  {
+    id: "3",
+    code: "ENG102",
+    name: "Academic Writing",
+    instructor: "Dr. Emily Rodriguez",
+    credits: 3,
+    status: "IN_PROGRESS",
+    grade: "B+",
+    progress: 85,
+    schedule: {
+      days: ["Mon", "Wed"],
+      time: "11:00 AM - 12:30 PM",
+      location: "Microsoft Teams: teams.microsoft.com/l/meetup-join/...",
+    },
+    semester: "Fall",
+    year: 2025,
+    category: "English",
+    enrollmentDate: "2025-08-15",
+    nextAssignment: {
+      title: "Research Paper Draft",
+      dueDate: "Oct 20, 2025",
+    },
+  },
+  {
+    id: "4",
+    code: "HIST105",
+    name: "World History I",
+    instructor: "Prof. David Thompson",
+    credits: 3,
+    status: "ENROLLED",
+    progress: 45,
+    schedule: {
+      days: ["Tue", "Thu"],
+      time: "10:00 AM - 11:30 AM",
+      location: "Virtual Classroom: campus.edu/virtual-room-150",
+    },
+    semester: "Fall",
+    year: 2025,
+    category: "History",
+    enrollmentDate: "2025-09-01",
+    nextAssignment: {
+      title: "Ancient Civilizations Essay",
+      dueDate: "Oct 18, 2025",
+    },
+  },
+  {
+    id: "5",
+    code: "BIO110",
+    name: "General Biology",
+    instructor: "Dr. Lisa Park",
+    credits: 4,
+    status: "COMPLETED",
+    grade: "A",
+    progress: 100,
+    schedule: {
+      days: ["Mon", "Wed", "Fri"],
+      time: "1:00 PM - 2:30 PM",
+      location: "Zoom Meeting ID: 987-654-321",
+    },
+    semester: "Spring",
+    year: 2025,
+    category: "Biology",
+    enrollmentDate: "2025-01-15",
+  },
+  {
+    id: "6",
+    code: "PHYS201",
+    name: "Physics I",
+    instructor: "Prof. Robert Kim",
+    credits: 4,
+    status: "DROPPED",
+    progress: 30,
+    schedule: {
+      days: ["Tue", "Thu"],
+      time: "8:00 AM - 9:30 AM",
+      location: "Discord Server: discord.gg/physics-class",
+    },
+    semester: "Fall",
+    year: 2025,
+    category: "Physics",
+    enrollmentDate: "2025-08-15",
+  },
+];
+
+// Mock API hook for student courses
+export function useGetStudentCoursesQuery(params: {
+  page: number;
+  limit: number;
+}) {
+  const isLoading = false;
+  const isError = false;
+  const error = null;
+
+  const { page, limit } = params;
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedCourses = mockStudentCoursesData.slice(startIndex, endIndex);
+
+  const data = {
+    data: {
+      courses: paginatedCourses,
+      pagination: {
+        page,
+        limit,
+        total: mockStudentCoursesData.length,
+        totalPages: Math.ceil(mockStudentCoursesData.length / limit),
+      },
+    },
+  };
+
+  return {
+    data,
+    isLoading,
+    isError,
+    error,
+  };
+}

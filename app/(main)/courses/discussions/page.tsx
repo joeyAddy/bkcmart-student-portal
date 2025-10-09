@@ -1,10 +1,20 @@
+import { Metadata } from "next";
 import { Page } from "@/components/page-template";
+import { AllDiscussionsSection } from "@/components/page-sections/discussions/all-discussions-section";
 
-export default function DiscussionForumsPage() {
+export const metadata: Metadata = {
+  title: "Discussions | Student Portal",
+  description:
+    "Participate in course discussions and collaborate with classmates",
+};
+
+export default function DiscussionsPage() {
   return (
     <Page
-      title="Discussion Forums"
-      description="Participate in course discussions with classmates and instructors"
-    />
+      title="Discussions"
+      description="Participate in course discussions and collaborate with classmates"
+    >
+      <AllDiscussionsSection />
+    </Page>
   );
 }

@@ -1,7 +1,9 @@
+import { ActivityFeed } from "./activity-feed";
+import { CourseActivityTimeline } from "./course-activity-timeline";
 import { RightSidebar } from "./right-sidebar";
 import { StatsCards } from "./stats-cards";
 import { StudyStatistics } from "./study-statistics";
-import { RecentActivity } from "./recent-activity";
+import { UpcomingClasses } from "./upcoming-classes";
 
 export function DashboardMain() {
   return (
@@ -14,12 +16,15 @@ export function DashboardMain() {
         {/* Left Content - 2 columns */}
         <div className="lg:col-span-2 space-y-6">
           <StudyStatistics />
-          <RecentActivity />
+          <UpcomingClasses />
+          {/* Course Activity Timeline */}
+          <CourseActivityTimeline />
         </div>
 
         {/* Right Sidebar - 1 column */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 space-y-6">
           <RightSidebar />
+          <ActivityFeed />
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@ export function ProgressChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>My Progress</CardTitle>
+        <CardTitle>My Course Progress</CardTitle>
         <CardDescription>Total hours: 6h 32 min</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">

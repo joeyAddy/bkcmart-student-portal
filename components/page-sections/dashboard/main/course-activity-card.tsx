@@ -1,4 +1,4 @@
-import { BookOpen, Clock, Star, User } from "lucide-react";
+import { BookOpen, Clock, Star, User, Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,19 +10,25 @@ interface CourseActivityCardProps {
   title: string;
   category: string;
   instructor: string;
-  lastActivity: string;
-  progress: number;
+  startTime?: string;
+  duration?: string;
+  date?: string;
+  lastActivity?: string;
+  progress?: number;
   lessons: number;
   hours: number;
   rating: number;
   reviews: string;
-  status: "completed" | "in-progress" | "not-started";
+  status: "completed" | "in-progress" | "not-started" | "upcoming";
 }
 
 export function CourseActivityCard({
   title,
   category,
   instructor,
+  startTime,
+  duration,
+  date,
   lastActivity,
   progress,
   lessons,
@@ -37,6 +43,8 @@ export function CourseActivityCard({
         return "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20";
       case "in-progress":
         return "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20";
+      case "upcoming":
+        return "bg-teal-500 text-white hover:bg-teal-600";
       case "not-started":
         return "bg-muted hover:bg-muted/80";
       default:
@@ -50,6 +58,8 @@ export function CourseActivityCard({
         return "Completed";
       case "in-progress":
         return "Continue";
+      case "upcoming":
+        return "Join Class";
       case "not-started":
         return "Start Course";
       default:
@@ -74,12 +84,7 @@ export function CourseActivityCard({
 
         <div className="pt-2 space-y-4">
           {/* Category Badge */}
-          <Badge
-            variant="outline"
-            className="text-muted-foreground border-muted-foreground/30"
-          >
-            {category}
-          </Badge>
+          <Badge className="text-xs bg-gray-100">{category}</Badge>
 
           {/* Course Title */}
           <h4 className="font-semibold text-lg leading-tight">{title}</h4>
@@ -96,13 +101,24 @@ export function CourseActivityCard({
             </span>
           </div>
 
-          {/* Last Activity */}
-          <div className="text-sm text-muted-foreground">
-            Last activity: {lastActivity}
-          </div>
+          {/* Class Schedule */}
+          {status === "upcoming" ? (
+            <div className="space-y-1">
+              <div className="text-sm font-medium text-foreground">
+                {date} at {startTime}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Duration: {duration}
+              </div>
+            </div>
+          ) : (
+            <div className="text-sm text-muted-foreground">
+              Last activity: {lastActivity}
+            </div>
+          )}
 
           {/* Progress Bar (only for in-progress courses) */}
-          {status === "in-progress" ? (
+          {status === "in-progress" && progress !== undefined ? (
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Progress</span>
@@ -134,6 +150,9 @@ export function CourseActivityCard({
               <span className="text-sm text-muted-foreground">({reviews})</span>
             </div>
             <Button variant="outline" size="sm" className={getStatusColor()}>
+              {status === "upcoming" && (
+                <Play className="w-4 h-4 mr-1 fill-current" />
+              )}
               {getStatusText()}
             </Button>
           </div>

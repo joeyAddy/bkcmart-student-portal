@@ -7,6 +7,9 @@ export * from "./students";
 export * from "./courses";
 export * from "./programs";
 export * from "./departments";
+export * from "./assignments";
+export * from "./materials";
+export * from "./discussions";
 
 // You can add more feature slices here as needed:
 // export * from "./staff";

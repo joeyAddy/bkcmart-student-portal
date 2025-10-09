@@ -23,7 +23,6 @@ export const sectionNavigation: NavSection[] = [
         url: "/dashboard",
         items: [
           { title: "Quick Summary", url: "/dashboard" },
-          { title: "Recent Activity", url: "/dashboard/activity" },
           { title: "Upcoming Deadlines", url: "/dashboard/deadlines" },
         ],
       },
