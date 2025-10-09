@@ -59,13 +59,9 @@ export function ForumSidebar({
         {/* Period Selector */}
         <div className="flex items-center gap-2 text-sm mb-4">
           <span className="text-muted-foreground font-medium">Period</span>
-          <Select
-            value={selectedPeriod}
-            defaultValue="2022/2023 Odd Semester"
-            onValueChange={onPeriodChange}
-          >
+          <Select value={selectedPeriod} onValueChange={onPeriodChange}>
             <SelectTrigger className="h-8">
-              <SelectValue />
+              <SelectValue placeholder="Select period" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="2022/2023 Odd Semester">
