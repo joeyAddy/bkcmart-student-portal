@@ -1,4 +1,4 @@
-import { Page } from "@/components/page-template";
+import { Page } from "@/components/shared/page-template";
 import { DeadlinesMain } from "@/components/page-sections/dashboard/deadlines";
 
 export default function DashboardDeadlinesPage() {

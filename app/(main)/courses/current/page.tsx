@@ -1,6 +1,6 @@
 "use client";
 
-import { Page } from "@/components/page-template";
+import { Page } from "@/components/shared/page-template";
 import { AllCoursesSection } from "@/components/page-sections/courses/all-courses-section";
 
 export default function CurrentCoursesPage() {

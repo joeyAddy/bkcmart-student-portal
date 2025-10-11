@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { Page } from "@/components/page-template";
-import { AllDiscussionsSection } from "@/components/page-sections/discussions/all-discussions-section";
+import { Page } from "@/components/shared/page-template";
+import { AllDiscussionsSection } from "@/components/page-sections/courses/discussions/all-discussions-section";
 
 export const metadata: Metadata = {
   title: "Discussions | Student Portal",

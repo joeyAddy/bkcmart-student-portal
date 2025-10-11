@@ -1,4 +1,4 @@
-import { Page } from "@/components/page-template";
+import { Page } from "@/components/shared/page-template";
 
 // Mock assignment data - in a real app, this would come from an API or database
 const assignmentData = {

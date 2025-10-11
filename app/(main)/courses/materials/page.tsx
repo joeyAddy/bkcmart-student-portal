@@ -1,5 +1,5 @@
-import { AllMaterialsSection } from "@/components/page-sections/materials/all-materials-section";
-import { Page } from "@/components/page-template";
+import { AllMaterialsSection } from "@/components/page-sections/courses/materials/all-materials-section";
+import { Page } from "@/components/shared/page-template";
 
 export default function CourseMaterialsPage() {
   return (

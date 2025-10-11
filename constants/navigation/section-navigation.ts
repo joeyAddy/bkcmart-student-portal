@@ -49,7 +49,6 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Class Timetable", url: "/courses/schedule" },
           { title: "Exam Schedule", url: "/courses/exams" },
-          { title: "Assignment Due Dates", url: "/courses/due-dates" },
         ],
       },
       {

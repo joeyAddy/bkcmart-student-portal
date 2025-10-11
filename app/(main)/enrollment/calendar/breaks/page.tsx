@@ -1,4 +1,4 @@
-import { Page } from "@/components/page-template";
+import { Page } from "@/components/shared/page-template";
 
 export default function HolidaysBreaksPage() {
   return (

@@ -1,4 +1,4 @@
-import { Page } from "@/components/page-template";
+import { Page } from "@/components/shared/page-template";
 import { ActivityFeed } from "@/components/page-sections/dashboard/main";
 
 export default function DashboardActivityPage() {
