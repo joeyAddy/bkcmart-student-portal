@@ -58,7 +58,6 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Live Classes", url: "/courses/virtual/live" },
           { title: "Recorded Lectures", url: "/courses/virtual/recorded" },
-          { title: "Study Groups", url: "/courses/virtual/groups" },
         ],
       },
     ],
@@ -70,10 +69,7 @@ export const sectionNavigation: NavSection[] = [
         title: "Grades",
         icon: Award,
         url: "/academics/grades",
-        items: [
-          { title: "Current Grades", url: "/academics/grades" },
-          { title: "Grade History", url: "/academics/grades/history" },
-        ],
+        items: [{ title: "Current Grades", url: "/academics/grades" }],
       },
     ],
   },

@@ -10,15 +10,7 @@ export * from "./departments";
 export * from "./assignments";
 export * from "./materials";
 export * from "./discussions";
-
-// You can add more feature slices here as needed:
-// export * from "./staff";
-// export * from "./departments";
-// export * from "./admissions";
-// export * from "./payments";
-// export * from "./reports";
-// export * from "./settings";
-// export * from "./communications";
+export * from "./grades";
 
 // Re-export the base API for store configuration
 export { baseApi } from "./base";
