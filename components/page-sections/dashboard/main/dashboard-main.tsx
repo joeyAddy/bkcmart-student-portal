@@ -1,6 +1,6 @@
 import { ActivityFeed } from "./activity-feed";
 import { CourseActivityTimeline } from "./course-activity-timeline";
-import { RightSidebar } from "./right-sidebar";
+import { RightSidebar } from "./sidebar/right-sidebar";
 import { StatsCards } from "./stats-cards";
 import { StudyStatistics } from "./study-statistics";
 import { UpcomingClasses } from "./upcoming-classes";
