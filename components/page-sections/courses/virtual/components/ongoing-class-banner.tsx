@@ -3,15 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Video,
-  Users,
-  ExternalLink,
-  Mic,
-  Camera,
-} from "lucide-react";
+import { Video, Users, ExternalLink, Mic, Camera } from "lucide-react";
 import { OngoingClass } from "../types";
-import { getElapsedTime, getTypeIcon, getTypeColor } from "../utils/virtual-class-utils";
+import {
+  getElapsedTime,
+  getTypeIcon,
+  getTypeColor,
+} from "../utils/virtual-class-utils";
 
 interface OngoingClassBannerProps {
   ongoingClass: OngoingClass | null;

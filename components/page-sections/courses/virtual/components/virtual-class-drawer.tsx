@@ -118,7 +118,9 @@ export function VirtualClassDrawer({
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 text-sm">
                     <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span>{formatDisplayDate(selectedClass.scheduledTime)}</span>
+                    <span>
+                      {formatDisplayDate(selectedClass.scheduledTime)}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Clock className="w-4 h-4 text-muted-foreground" />

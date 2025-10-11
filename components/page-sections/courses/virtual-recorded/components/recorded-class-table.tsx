@@ -2,44 +2,38 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Clock } from "lucide-react";
+import { Video, Clock } from "lucide-react";
 import { DataTable as GenericDataTable } from "@/components/shared/tables/data-table";
-import {
-  createVirtualClassColumns,
-  VirtualClass,
-} from "@/constants/table-columns/virtual-classes";
+import { recordedClassColumns } from "@/constants/table-columns/recorded-classes";
+import { RecordedClass } from "../types";
 
-interface VirtualClassTableProps {
-  classes: VirtualClass[];
-  onViewClass: (virtualClass: VirtualClass) => void;
+interface RecordedClassTableProps {
+  classes: RecordedClass[];
 }
 
-export function VirtualClassTable({
-  classes,
-  onViewClass,
-}: VirtualClassTableProps) {
+export function RecordedClassTable({ classes }: RecordedClassTableProps) {
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              Upcoming Virtual Classes
+              <Video className="w-5 h-5" />
+              Recorded Classes
             </CardTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              Your scheduled virtual class sessions
+              Watch recorded class sessions and download lecture materials
             </p>
           </div>
           <Badge variant="secondary" className="gap-1">
             <Clock className="w-3 h-3" />
-            {classes.length} scheduled
+            {classes.length} recordings
           </Badge>
         </div>
       </CardHeader>
       <CardContent>
         <GenericDataTable
-          columns={createVirtualClassColumns(onViewClass)}
+          columns={recordedClassColumns}
           data={classes}
           enableRowSelection={false}
           enableDragAndDrop={false}

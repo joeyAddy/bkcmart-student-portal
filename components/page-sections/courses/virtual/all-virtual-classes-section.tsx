@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { VirtualClass } from "./types";
-import { OngoingClassBanner, VirtualClassDrawer, VirtualClassTable } from "./components";
+import {
+  OngoingClassBanner,
+  VirtualClassDrawer,
+  VirtualClassTable,
+} from "./components";
 import { SAMPLE_VIRTUAL_CLASSES, ONGOING_CLASS } from "./utils/sample-data";
 
 export function AllVirtualClassesSection() {

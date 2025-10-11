@@ -72,10 +72,13 @@ export const getStatusColor = (status: string): string => {
 /**
  * Check if a scheduled class can be joined (within 15 minutes of start time)
  */
-export const canJoinClass = (scheduledTime: string, status: string): boolean => {
+export const canJoinClass = (
+  scheduledTime: string,
+  status: string
+): boolean => {
   if (status === "ongoing") return true;
   if (status !== "scheduled") return false;
-  
+
   const now = new Date();
   const scheduled = new Date(scheduledTime);
   const diffMins = (scheduled.getTime() - now.getTime()) / (1000 * 60);
