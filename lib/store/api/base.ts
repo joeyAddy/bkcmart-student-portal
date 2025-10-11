@@ -59,6 +59,7 @@ export const baseApi = createApi({
     "Department",
     "Program",
     "Curriculum",
+    "Registration",
 
     // Admissions
     "Application",

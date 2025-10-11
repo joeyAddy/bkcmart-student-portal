@@ -11,6 +11,7 @@ export * from "./assignments";
 export * from "./materials";
 export * from "./discussions";
 export * from "./grades";
+export * from "./registration";
 
 // Re-export the base API for store configuration
 export { baseApi } from "./base";
