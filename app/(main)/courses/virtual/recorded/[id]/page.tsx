@@ -1,19 +1,23 @@
 import { Page } from "@/components/shared/page-template";
-import { RecordedClassDetailSection } from "@/components/page-sections/courses/virtual-recorded/recorded-class-detail-section";
+import { RecordedClassDetailSection } from "@/components/page-sections/courses/virtual-recorded/detail";
 
 interface RecordedClassDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function RecordedClassDetailPage({ params }: RecordedClassDetailPageProps) {
+export default async function RecordedClassDetailPage({
+  params,
+}: RecordedClassDetailPageProps) {
+  const { id } = await params;
+
   return (
     <Page
       title="Recorded Class"
       description="Watch and interact with recorded class content"
     >
-      <RecordedClassDetailSection classId={params.id} />
+      <RecordedClassDetailSection classId={id} />
     </Page>
   );
 }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { CloudinaryVideoPlayer } from "@/components/shared/cloudinary-video-player";
 import {
   Play,
   Download,
@@ -19,8 +20,8 @@ import {
   Tag,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { RecordedClass } from "./types";
-import { SAMPLE_RECORDED_CLASSES } from "./utils/sample-data";
+import { RecordedClass } from "../types";
+import { SAMPLE_RECORDED_CLASSES } from "../utils/sample-data";
 import {
   formatRecordedDate,
   formatDuration,
@@ -29,20 +30,26 @@ import {
   formatViews,
   getTimeAgo,
   getTypeIcon,
-} from "./utils/recorded-class-utils";
+} from "../utils/recorded-class-utils";
 
 interface RecordedClassDetailSectionProps {
   classId: string;
 }
 
-export function RecordedClassDetailSection({ classId }: RecordedClassDetailSectionProps) {
-  const [recordedClass, setRecordedClass] = useState<RecordedClass | null>(null);
+export function RecordedClassDetailSection({
+  classId,
+}: RecordedClassDetailSectionProps) {
+  const [recordedClass, setRecordedClass] = useState<RecordedClass | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     // Simulate API call - replace with actual API call
-    const foundClass = SAMPLE_RECORDED_CLASSES.find(cls => cls.id === classId);
+    const foundClass = SAMPLE_RECORDED_CLASSES.find(
+      (cls) => cls.id === classId
+    );
     setRecordedClass(foundClass || null);
     setIsLoading(false);
   }, [classId]);
@@ -52,7 +59,9 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="text-sm text-muted-foreground mt-2">Loading recording...</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Loading recording...
+          </p>
         </div>
       </div>
     );
@@ -66,7 +75,7 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
         <p className="text-muted-foreground mb-4">
           The requested recording could not be found.
         </p>
-        <Button onClick={() => router.push('/courses/virtual/recorded')}>
+        <Button onClick={() => router.push("/courses/virtual/recorded")}>
           <ChevronLeft className="w-4 h-4 mr-2" />
           Back to Recordings
         </Button>
@@ -78,10 +87,10 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
     <div className="space-y-6">
       {/* Header with Back Button */}
       <div className="flex items-center gap-4">
-        <Button 
-          variant="outline" 
-          size="sm" 
-          onClick={() => router.push('/courses/virtual/recorded')}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => router.push("/courses/virtual/recorded")}
         >
           <ChevronLeft className="w-4 h-4 mr-2" />
           Back to Recordings
@@ -89,23 +98,14 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
       </div>
 
       {/* Video Player Section */}
-      <Card>
+      <Card className="p-0 border-0">
         <CardContent className="p-0">
-          {/* Video Placeholder - Replace with actual video player */}
-          <div className="relative aspect-video bg-black rounded-t-lg flex items-center justify-center">
-            <div className="text-center text-white">
-              <Play className="w-16 h-16 mx-auto mb-4 opacity-80" />
-              <p className="text-lg font-medium">Video Player</p>
-              <p className="text-sm opacity-80">Click to play recording</p>
-            </div>
-            {/* Play overlay */}
-            <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors cursor-pointer flex items-center justify-center">
-              <Button size="lg" className="bg-white/20 hover:bg-white/30 backdrop-blur-sm">
-                <Play className="w-6 h-6 mr-2" />
-                Play Recording
-              </Button>
-            </div>
-          </div>
+          <CloudinaryVideoPlayer
+            videoUrl={recordedClass.videoUrl}
+            cloudName="doupvyje8"
+            autoplay={false}
+            muted={false}
+          />
         </CardContent>
       </Card>
 
@@ -118,16 +118,28 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
             <CardHeader>
               <div className="space-y-2">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <Badge className={getTypeColor(recordedClass.type)} variant="outline">
+                  <Badge
+                    className={getTypeColor(recordedClass.type)}
+                    variant="outline"
+                  >
                     {getTypeIcon(recordedClass.type)}
-                    <span className="ml-1 capitalize">{recordedClass.type}</span>
+                    <span className="ml-1 capitalize">
+                      {recordedClass.type}
+                    </span>
                   </Badge>
-                  <Badge className={getQualityColor(recordedClass.quality)} variant="outline">
+                  <Badge
+                    className={getQualityColor(recordedClass.quality)}
+                    variant="outline"
+                  >
                     {recordedClass.quality}
                   </Badge>
                 </div>
-                <CardTitle className="text-2xl">{recordedClass.title}</CardTitle>
-                <p className="text-lg text-muted-foreground">{recordedClass.course}</p>
+                <CardTitle className="text-2xl">
+                  {recordedClass.title}
+                </CardTitle>
+                <p className="text-lg text-muted-foreground">
+                  {recordedClass.course}
+                </p>
               </div>
             </CardHeader>
             <CardContent>
@@ -158,7 +170,7 @@ export function RecordedClassDetailSection({ classId }: RecordedClassDetailSecti
 
           {/* Action Buttons */}
           <Card>
-            <CardContent className="pt-6">
+            <CardContent>
               <div className="flex flex-wrap gap-3">
                 <Button className="gap-2">
                   <Play className="w-4 h-4" />

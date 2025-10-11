@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { RecordedClass } from "./types";
-import { RecordedClassTable } from "./components";
+import { RecordedClassTable } from "./table";
 import { SAMPLE_RECORDED_CLASSES } from "./utils/sample-data";
 
 export function AllRecordedClassesSection() {

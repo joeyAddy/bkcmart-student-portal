@@ -20,14 +20,14 @@ export const formatDuration = (minutes: number): string => {
   if (minutes < 60) {
     return `${minutes} min`;
   }
-  
+
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
-  
+
   if (mins === 0) {
     return `${hours}h`;
   }
-  
+
   return `${hours}h ${mins}m`;
 };
 
@@ -86,11 +86,11 @@ export const formatViews = (views: number): string => {
   if (views < 1000) {
     return views.toString();
   }
-  
+
   if (views < 1000000) {
     return `${(views / 1000).toFixed(1)}K`;
   }
-  
+
   return `${(views / 1000000).toFixed(1)}M`;
 };
 
@@ -102,7 +102,7 @@ export const getTimeAgo = (dateString: string): string => {
   const recorded = new Date(dateString);
   const diffMs = now.getTime() - recorded.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  
+
   if (diffDays === 0) {
     return "Today";
   } else if (diffDays === 1) {

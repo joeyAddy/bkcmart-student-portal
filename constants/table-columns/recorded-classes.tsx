@@ -20,7 +20,6 @@ import {
   Video,
   PlayCircle,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { RecordedClass } from "@/components/page-sections/courses/virtual-recorded/types";
 import {
   formatRecordedDate,
@@ -32,7 +31,9 @@ import {
 } from "@/components/page-sections/courses/virtual-recorded/utils/recorded-class-utils";
 
 // Function to create columns with navigation callback
-export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
+export const createRecordedClassColumns = (
+  onNavigateToRecording?: (recordingId: string) => void
+): ColumnDef<RecordedClass>[] => [
   {
     accessorKey: "title",
     header: "Recording Details",
@@ -147,8 +148,8 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
       const recordedClass = row.original;
       return (
         <div className="flex flex-col gap-1">
-          <Badge 
-            className={getQualityColor(recordedClass.quality)} 
+          <Badge
+            className={getQualityColor(recordedClass.quality)}
             variant="outline"
           >
             {recordedClass.quality}
@@ -165,10 +166,11 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
     header: "Actions",
     cell: ({ row }) => {
       const recordedClass = row.original;
-      const router = useRouter();
 
       const handleView = () => {
-        router.push(`/courses/virtual/recorded/${recordedClass.id}`);
+        if (onNavigateToRecording) {
+          onNavigateToRecording(recordedClass.id);
+        }
       };
 
       return (
@@ -176,9 +178,9 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   className="h-8 w-8 p-0"
                   onClick={handleView}
                 >
@@ -195,11 +197,11 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   className="h-8 w-8 p-0"
-                  onClick={() => window.open(recordedClass.videoUrl, '_blank')}
+                  onClick={() => window.open(recordedClass.videoUrl, "_blank")}
                 >
                   <Play className="h-4 w-4" />
                   <span className="sr-only">Play video</span>
@@ -215,11 +217,13 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     className="h-8 w-8 p-0"
-                    onClick={() => window.open(recordedClass.downloadUrl, '_blank')}
+                    onClick={() =>
+                      window.open(recordedClass.downloadUrl, "_blank")
+                    }
                   >
                     <Download className="h-4 w-4" />
                     <span className="sr-only">Download video</span>
@@ -237,5 +241,5 @@ export const createRecordedClassColumns = (): ColumnDef<RecordedClass>[] => [
   },
 ];
 
-// Export default columns
+// Export default columns (without navigation)
 export const recordedClassColumns = createRecordedClassColumns();

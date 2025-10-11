@@ -1,1 +1,0 @@
-export { RecordedClassTable } from "./recorded-class-table";

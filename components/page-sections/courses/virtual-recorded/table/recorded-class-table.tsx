@@ -3,8 +3,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Video, Clock } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { DataTable as GenericDataTable } from "@/components/shared/tables/data-table";
-import { recordedClassColumns } from "@/constants/table-columns/recorded-classes";
+import { createRecordedClassColumns } from "@/constants/table-columns/recorded-classes";
 import { RecordedClass } from "../types";
 
 interface RecordedClassTableProps {
@@ -12,6 +13,14 @@ interface RecordedClassTableProps {
 }
 
 export function RecordedClassTable({ classes }: RecordedClassTableProps) {
+  const router = useRouter();
+
+  const handleNavigateToRecording = (recordingId: string) => {
+    router.push(`/courses/virtual/recorded/${recordingId}`);
+  };
+
+  const columns = createRecordedClassColumns(handleNavigateToRecording);
+
   return (
     <Card>
       <CardHeader>
@@ -33,7 +42,7 @@ export function RecordedClassTable({ classes }: RecordedClassTableProps) {
       </CardHeader>
       <CardContent>
         <GenericDataTable
-          columns={recordedClassColumns}
+          columns={columns}
           data={classes}
           enableRowSelection={false}
           enableDragAndDrop={false}

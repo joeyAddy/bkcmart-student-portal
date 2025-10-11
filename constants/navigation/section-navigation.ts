@@ -67,28 +67,12 @@ export const sectionNavigation: NavSection[] = [
     title: "Academic Progress",
     items: [
       {
-        title: "Grades & Transcripts",
+        title: "Grades",
         icon: Award,
         url: "/academics/grades",
         items: [
           { title: "Current Grades", url: "/academics/grades" },
           { title: "Grade History", url: "/academics/grades/history" },
-          { title: "Official Transcripts", url: "/academics/transcripts" },
-          { title: "Academic Standing", url: "/academics/standing" },
-        ],
-      },
-      {
-        title: "Degree Progress",
-        icon: GraduationCap,
-        url: "/academics/progress",
-        items: [
-          { title: "Degree Audit", url: "/academics/progress/audit" },
-          { title: "Completed Credits", url: "/academics/progress/credits" },
-          {
-            title: "Remaining Requirements",
-            url: "/academics/progress/requirements",
-          },
-          { title: "Graduation Timeline", url: "/academics/progress/timeline" },
         ],
       },
     ],
@@ -103,23 +87,22 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Register for Courses", url: "/enrollment/registration" },
           { title: "Course Catalog", url: "/enrollment/catalog" },
-          { title: "Waitlist Status", url: "/enrollment/waitlist" },
           { title: "Drop/Add Courses", url: "/enrollment/drop-add" },
         ],
       },
-      {
-        title: "Academic Calendar",
-        icon: Calendar,
-        url: "/enrollment/calendar",
-        items: [
-          { title: "Important Dates", url: "/enrollment/calendar" },
-          {
-            title: "Registration Periods",
-            url: "/enrollment/calendar/registration",
-          },
-          { title: "Holidays & Breaks", url: "/enrollment/calendar/breaks" },
-        ],
-      },
+      // {
+      //   title: "Academic Calendar",
+      //   icon: Calendar,
+      //   url: "/enrollment/calendar",
+      //   items: [
+      //     { title: "Important Dates", url: "/enrollment/calendar" },
+      //     {
+      //       title: "Registration Periods",
+      //       url: "/enrollment/calendar/registration",
+      //     },
+      //     { title: "Holidays & Breaks", url: "/enrollment/calendar/breaks" },
+      //   ],
+      // },
     ],
   },
   {
@@ -133,7 +116,6 @@ export const sectionNavigation: NavSection[] = [
           { title: "Current Balance", url: "/finances/tuition" },
           { title: "Payment History", url: "/finances/payment-history" },
           { title: "Fee Breakdown", url: "/finances/fees" },
-          { title: "Financial Aid", url: "/finances/aid" },
         ],
       },
       {
@@ -143,7 +125,6 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Make Payment", url: "/finances/payments/make" },
           { title: "Payment Plans", url: "/finances/payments/plans" },
-          { title: "1098-T Tax Form", url: "/finances/payments/tax-forms" },
         ],
       },
     ],
@@ -199,16 +180,6 @@ export const sectionNavigation: NavSection[] = [
           { title: "Inbox", url: "/communications/messages/inbox" },
           { title: "Announcements", url: "/communications/announcements" },
           { title: "Notification Settings", url: "/communications/settings" },
-        ],
-      },
-      {
-        title: "Campus News",
-        icon: Mail,
-        url: "/communications/news",
-        items: [
-          { title: "Campus Updates", url: "/communications/news/campus" },
-          { title: "Academic Calendar", url: "/communications/news/academic" },
-          { title: "Student Events", url: "/communications/news/events" },
         ],
       },
     ],
