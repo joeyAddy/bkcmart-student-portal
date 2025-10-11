@@ -9,15 +9,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { 
-  ExternalLink, 
-  Calendar, 
-  Clock, 
-  Users, 
+import {
+  ExternalLink,
+  Calendar,
+  Clock,
+  Users,
   Video,
   Monitor,
   Eye,
-  Bell
+  Bell,
 } from "lucide-react";
 
 export interface VirtualClass {
@@ -73,7 +73,9 @@ const getTimeUntilClass = (scheduledTime: string, status: string) => {
   const scheduled = new Date(scheduledTime);
   const diffTime = scheduled.getTime() - now.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const diffHours = Math.floor(
+    (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
   const diffMins = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
 
   if (diffTime < 0) return "Started";
@@ -127,7 +129,10 @@ const getTypeIcon = (type: string) => {
   }
 };
 
-export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
+// Function to create columns with callback
+export const createVirtualClassColumns = (
+  onViewClass: (virtualClass: VirtualClass) => void
+): ColumnDef<VirtualClass>[] => [
   {
     accessorKey: "title",
     header: "Class Details",
@@ -173,9 +178,7 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
     cell: ({ row }) => {
       const duration = row.getValue("duration") as number;
       return (
-        <div className="text-sm font-medium">
-          {formatDuration(duration)}
-        </div>
+        <div className="text-sm font-medium">{formatDuration(duration)}</div>
       );
     },
   },
@@ -197,7 +200,8 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
     header: "Participants",
     cell: ({ row }) => {
       const virtualClass = row.original;
-      const participationRate = (virtualClass.participants / virtualClass.maxParticipants) * 100;
+      const participationRate =
+        (virtualClass.participants / virtualClass.maxParticipants) * 100;
       return (
         <div className="flex items-center gap-2">
           <Users className="w-4 h-4 text-muted-foreground" />
@@ -227,20 +231,24 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
     header: "Status",
     cell: ({ row }) => {
       const virtualClass = row.original;
-      const timeUntil = getTimeUntilClass(virtualClass.scheduledTime, virtualClass.status);
-      
+      const timeUntil = getTimeUntilClass(
+        virtualClass.scheduledTime,
+        virtualClass.status
+      );
+
       return (
         <div className="flex flex-col gap-1">
-          <Badge className={getStatusColor(virtualClass.status)} variant="outline">
+          <Badge
+            className={getStatusColor(virtualClass.status)}
+            variant="outline"
+          >
             {virtualClass.status === "ongoing" && (
               <div className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse" />
             )}
             <span className="capitalize">{virtualClass.status}</span>
           </Badge>
           {timeUntil !== "-" && (
-            <div className="text-xs text-muted-foreground">
-              {timeUntil}
-            </div>
+            <div className="text-xs text-muted-foreground">{timeUntil}</div>
           )}
         </div>
       );
@@ -251,7 +259,9 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const virtualClass = row.original;
-      const isJoinable = virtualClass.status === "scheduled" || virtualClass.status === "ongoing";
+      const isJoinable =
+        virtualClass.status === "scheduled" ||
+        virtualClass.status === "ongoing";
       const canJoin = () => {
         if (virtualClass.status === "ongoing") return true;
         const now = new Date();
@@ -269,6 +279,7 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
                   variant="outline"
                   size="sm"
                   className="h-8 w-8 p-0"
+                  onClick={() => onViewClass(virtualClass)}
                 >
                   <Eye className="h-4 w-4" />
                   <span className="sr-only">View details</span>
@@ -296,10 +307,9 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>
-                    {canJoin() 
-                      ? "Join virtual class" 
-                      : "Available 15 minutes before start time"
-                    }
+                    {canJoin()
+                      ? "Join virtual class"
+                      : "Available 15 minutes before start time"}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -310,11 +320,7 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 w-8 p-0"
-                  >
+                  <Button variant="outline" size="sm" className="h-8 w-8 p-0">
                     <Bell className="h-4 w-4" />
                     <span className="sr-only">Set reminder</span>
                   </Button>
@@ -330,3 +336,6 @@ export const virtualClassColumns: ColumnDef<VirtualClass>[] = [
     },
   },
 ];
+
+// Export backward compatible version
+export const virtualClassColumns = createVirtualClassColumns(() => {});

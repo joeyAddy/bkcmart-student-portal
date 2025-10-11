@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import {
   Video,
   Users,
   Clock,
@@ -13,10 +21,11 @@ import {
   Mic,
   Camera,
   Monitor,
+  X,
 } from "lucide-react";
 import { DataTable as GenericDataTable } from "@/components/shared/tables/data-table";
 import {
-  virtualClassColumns,
+  createVirtualClassColumns,
   type VirtualClass,
 } from "@/constants/table-columns/virtual-classes";
 
@@ -84,6 +93,13 @@ const ONGOING_CLASS = {
 export function AllVirtualClassesSection() {
   const [classes] = useState<VirtualClass[]>(SAMPLE_VIRTUAL_CLASSES);
   const [ongoingClass] = useState(ONGOING_CLASS);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState<VirtualClass | null>(null);
+
+  const handleViewClass = (virtualClass: VirtualClass) => {
+    setSelectedClass(virtualClass);
+    setIsDrawerOpen(true);
+  };
 
   const getElapsedTime = (startTime: string) => {
     const now = new Date();
@@ -234,7 +250,7 @@ export function AllVirtualClassesSection() {
         </CardHeader>
         <CardContent>
           <GenericDataTable
-            columns={virtualClassColumns}
+            columns={createVirtualClassColumns(handleViewClass)}
             data={classes}
             enableRowSelection={false}
             enableDragAndDrop={false}
@@ -246,6 +262,215 @@ export function AllVirtualClassesSection() {
           />
         </CardContent>
       </Card>
+
+      {/* Virtual Class Details Drawer */}
+      <Drawer
+        direction="right"
+        open={isDrawerOpen}
+        onOpenChange={setIsDrawerOpen}
+      >
+        <DrawerContent className="w-full max-w-md">
+          <DrawerHeader className="border-b">
+            <div className="flex items-start justify-between">
+              <div className="space-y-1">
+                <DrawerTitle className="text-lg font-semibold">
+                  {selectedClass?.title}
+                </DrawerTitle>
+                <DrawerDescription className="text-sm">
+                  {selectedClass?.course}
+                </DrawerDescription>
+              </div>
+              <DrawerClose asChild>
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close</span>
+                </Button>
+              </DrawerClose>
+            </div>
+          </DrawerHeader>
+
+          <div className="flex-1 overflow-y-auto p-6">
+            {selectedClass && (
+              <div className="space-y-6">
+                {/* Class Status */}
+                <div className="space-y-2">
+                  <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                    Status
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      className={
+                        selectedClass.status === "ongoing"
+                          ? "bg-green-100 text-green-800 border-green-200"
+                          : selectedClass.status === "scheduled"
+                          ? "bg-blue-100 text-blue-800 border-blue-200"
+                          : selectedClass.status === "completed"
+                          ? "bg-gray-100 text-gray-800 border-gray-200"
+                          : "bg-red-100 text-red-800 border-red-200"
+                      }
+                      variant="outline"
+                    >
+                      {selectedClass.status === "ongoing" && (
+                        <div className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse" />
+                      )}
+                      <span className="capitalize">{selectedClass.status}</span>
+                    </Badge>
+                    <Badge
+                      className={
+                        selectedClass.type === "lecture"
+                          ? "bg-purple-100 text-purple-800 border-purple-200"
+                          : selectedClass.type === "workshop"
+                          ? "bg-orange-100 text-orange-800 border-orange-200"
+                          : "bg-cyan-100 text-cyan-800 border-cyan-200"
+                      }
+                      variant="outline"
+                    >
+                      {selectedClass.type === "lecture" && (
+                        <Monitor className="w-3 h-3 mr-1" />
+                      )}
+                      {selectedClass.type === "workshop" && (
+                        <Users className="w-3 h-3 mr-1" />
+                      )}
+                      {selectedClass.type === "lab" && (
+                        <Video className="w-3 h-3 mr-1" />
+                      )}
+                      <span className="capitalize">{selectedClass.type}</span>
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Instructor Info */}
+                <div className="space-y-2">
+                  <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                    Instructor
+                  </h3>
+                  <p className="text-sm">{selectedClass.instructor}</p>
+                </div>
+
+                {/* Schedule Info */}
+                <div className="space-y-2">
+                  <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                    Schedule
+                  </h3>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Calendar className="w-4 h-4 text-muted-foreground" />
+                      <span>
+                        {new Date(
+                          selectedClass.scheduledTime
+                        ).toLocaleDateString("en-US", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <Clock className="w-4 h-4 text-muted-foreground" />
+                      <span>
+                        {new Date(
+                          selectedClass.scheduledTime
+                        ).toLocaleTimeString("en-US", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}{" "}
+                        ({selectedClass.duration} minutes)
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Participants */}
+                <div className="space-y-2">
+                  <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                    Participants
+                  </h3>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Users className="w-4 h-4 text-muted-foreground" />
+                    <span>
+                      {selectedClass.participants} /{" "}
+                      {selectedClass.maxParticipants} enrolled
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full"
+                      style={{
+                        width: `${
+                          (selectedClass.participants /
+                            selectedClass.maxParticipants) *
+                          100
+                        }%`,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="space-y-2">
+                  <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                    Description
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    {selectedClass.description}
+                  </p>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-3 pt-4 border-t">
+                  {selectedClass.status === "ongoing" && (
+                    <Button className="w-full gap-2" size="lg">
+                      <Video className="w-4 h-4" />
+                      Join Live Session
+                    </Button>
+                  )}
+
+                  {selectedClass.status === "scheduled" && (
+                    <>
+                      {(() => {
+                        const now = new Date();
+                        const scheduled = new Date(selectedClass.scheduledTime);
+                        const diffMins =
+                          (scheduled.getTime() - now.getTime()) / (1000 * 60);
+                        const canJoin = diffMins <= 15 && diffMins >= 0;
+
+                        return canJoin ? (
+                          <Button className="w-full gap-2" size="lg">
+                            <Video className="w-4 h-4" />
+                            Join Early (Session Starting Soon)
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            className="w-full gap-2"
+                            size="lg"
+                            disabled
+                          >
+                            <Clock className="w-4 h-4" />
+                            Session Not Started
+                          </Button>
+                        );
+                      })()}
+                    </>
+                  )}
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Calendar className="w-4 h-4" />
+                      Add to Calendar
+                    </Button>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      Course Page
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
