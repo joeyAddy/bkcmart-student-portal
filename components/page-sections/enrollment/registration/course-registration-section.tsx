@@ -5,10 +5,12 @@ import { useRegistrationCart, useCourseSelection } from "@/hooks/registration";
 import { useRegisterForCoursesMutation } from "@/lib/store/api/registration";
 import { toast } from "sonner";
 
-import { SemesterTabs } from "./semester-tabs";
-import { AvailableCourses } from "./available-courses";
-import { RegistrationCart } from "./registration-cart";
-import { RegistrationSummary } from "./registration-summary";
+import {
+  SemesterTabs,
+  AvailableCourses,
+  RegistrationCart,
+  RegistrationSummary,
+} from "../shared";
 
 export function CourseRegistrationSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
