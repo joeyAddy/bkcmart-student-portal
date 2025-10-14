@@ -12,6 +12,7 @@ export * from "./materials";
 export * from "./discussions";
 export * from "./grades";
 export * from "./registration";
+export * from "./catalog";
 
 // Re-export the base API for store configuration
 export { baseApi } from "./base";
