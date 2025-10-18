@@ -43,7 +43,9 @@ interface ForumContent {
 }
 
 export function AllDiscussionsSection() {
-  const [selectedPeriod, setSelectedPeriod] = useState("current");
+  const [selectedPeriod, setSelectedPeriod] = useState(
+    "2022/2023 Odd Semester"
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("1");
   const [selectedForum, setSelectedForum] = useState(1);
