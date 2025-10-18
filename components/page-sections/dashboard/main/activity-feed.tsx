@@ -109,13 +109,6 @@ export function ActivityFeed() {
             );
           })}
         </div>
-
-        {/* Load More */}
-        <div className="mt-4 text-center">
-          <button className="text-sm text-primary font-semibold hover:underline">
-            Load More Activities
-          </button>
-        </div>
       </CardContent>
     </Card>
   );

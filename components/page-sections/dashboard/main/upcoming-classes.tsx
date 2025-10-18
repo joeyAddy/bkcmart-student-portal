@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CourseActivityCard } from "./course-activity-card";
 
 const upcomingClassesData = [
@@ -34,9 +35,12 @@ export function UpcomingClasses() {
     <div className="bg-card rounded-xl border p-6">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold">Upcoming Classes</h3>
-        <button className="text-sm font-semibold text-primary hover:underline">
+        <Link
+          className="text-sm font-semibold text-primary hover:underline"
+          href="/courses/schedule"
+        >
           View All Classes
-        </button>
+        </Link>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

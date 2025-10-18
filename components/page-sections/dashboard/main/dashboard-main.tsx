@@ -12,7 +12,7 @@ export function DashboardMain() {
       <StatsCards />
 
       {/* Main Content Area */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 xl:grid-cols-3">
         {/* Left Content - 2 columns */}
         <div className="lg:col-span-2 space-y-6">
           <StudyStatistics />
@@ -22,7 +22,7 @@ export function DashboardMain() {
         </div>
 
         {/* Right Sidebar - 1 column */}
-        <div className="lg:col-span-1 space-y-6">
+        <div className="xl:col-span-1 space-y-6">
           <RightSidebar />
           <ActivityFeed />
         </div>

@@ -56,7 +56,7 @@ export function RightSidebar() {
             asChild
             className="h-auto font-semibold p-0"
           >
-            <Link href="/assignments">See All</Link>
+            <Link href="/courses/assignments">See All</Link>
           </Button>
         </div>
 
