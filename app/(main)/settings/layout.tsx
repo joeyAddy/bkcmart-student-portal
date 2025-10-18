@@ -13,7 +13,7 @@ const settingsNavigation = [
   {
     id: "general",
     name: "Profile Settings",
-    href: "/settings/general",
+    href: "/settings/profile",
     description: "Manage your profile information",
     pageTitle: "Profile Settings",
     pageDescription: "Manage your profile information and personal details",
@@ -64,7 +64,7 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
         className="w-full flex flex-col xl:flex-row xl:gap-8"
       >
         {/* Tabs Navigation */}
-        <TabsList className="grid bg-card w-full grid-cols-3 mb-6 xl:mb-0 xl:w-64 xl:flex xl:flex-col xl:h-fit xl:p-2">
+        <TabsList className="grid dark:bg-card w-full grid-cols-3 mb-6 xl:mb-0 xl:w-64 xl:flex xl:flex-col xl:h-fit xl:p-2">
           {settingsNavigation.map((item) => (
             <TabsTrigger
               key={item.id}

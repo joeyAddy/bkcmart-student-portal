@@ -17,7 +17,7 @@ export const secondaryNavigation: NavItem[] = [
     url: "/settings",
     icon: Settings,
     items: [
-      { title: "Profile Settings", url: "/settings/general" },
+      { title: "Profile Settings", url: "/settings/profile" },
       { title: "Security", url: "/settings/security" },
       { title: "Notifications", url: "/settings/notifications" },
     ],

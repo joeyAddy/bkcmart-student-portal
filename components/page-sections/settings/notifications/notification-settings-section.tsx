@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface NotificationSetting {
   id: string;
@@ -79,7 +81,7 @@ export function NotificationSettingsSection() {
   };
 
   return (
-    <div className="space-y-6">
+    <Card className="p-6">
       {/* Header */}
       <div className="space-y-2">
         <h2 className="text-xl font-semibold">Notifications</h2>
@@ -88,28 +90,31 @@ export function NotificationSettingsSection() {
           time
         </p>
       </div>
-
+      <Separator />
       {/* Notification Settings List */}
       <div className="space-y-6">
         {notifications.map((notification) => (
-          <div
-            key={notification.id}
-            className="flex items-start justify-between gap-4"
-          >
-            <div className="flex-1 space-y-1">
-              <h3 className="font-medium text-base">{notification.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {notification.description}
-              </p>
+          <>
+            <div
+              key={notification.id}
+              className="flex items-start justify-between gap-4"
+            >
+              <div className="flex-1 space-y-1">
+                <h3 className="font-medium text-base">{notification.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {notification.description}
+                </p>
+              </div>
+              <Switch
+                checked={notification.enabled}
+                onCheckedChange={() => handleToggle(notification.id)}
+                className="mt-1"
+              />
             </div>
-            <Switch
-              checked={notification.enabled}
-              onCheckedChange={() => handleToggle(notification.id)}
-              className="mt-1"
-            />
-          </div>
+            <Separator />
+          </>
         ))}
       </div>
-    </div>
+    </Card>
   );
 }
