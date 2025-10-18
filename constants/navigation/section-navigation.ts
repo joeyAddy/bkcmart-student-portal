@@ -111,7 +111,6 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Current Balance", url: "/finances/tuition" },
           { title: "Payment History", url: "/finances/payment-history" },
-          { title: "Fee Breakdown", url: "/finances/fees" },
         ],
       },
       {
@@ -119,7 +118,7 @@ export const sectionNavigation: NavSection[] = [
         icon: CreditCard,
         url: "/finances/payments",
         items: [
-          { title: "Make Payment", url: "/finances/payments/make" },
+          { title: "Payment Requests", url: "/finances/payments/request" },
           { title: "Payment Plans", url: "/finances/payments/plans" },
         ],
       },
@@ -175,7 +174,6 @@ export const sectionNavigation: NavSection[] = [
         items: [
           { title: "Inbox", url: "/communications/messages/inbox" },
           { title: "Announcements", url: "/communications/announcements" },
-          { title: "Notification Settings", url: "/communications/settings" },
         ],
       },
     ],
