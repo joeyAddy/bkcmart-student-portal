@@ -11,7 +11,7 @@ interface SettingsLayoutProps {
 
 const settingsNavigation = [
   {
-    id: "general",
+    id: "profile",
     name: "Profile Settings",
     href: "/settings/profile",
     description: "Manage your profile information",
@@ -41,7 +41,7 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
   const router = useRouter();
 
   // Extract the current tab from pathname
-  const currentTab = pathname.split("/").pop() || "general";
+  const currentTab = pathname.split("/").pop() || "profile";
 
   // Find the current page info
   const currentPage =
