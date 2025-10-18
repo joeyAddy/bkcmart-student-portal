@@ -50,7 +50,7 @@ export function PhoneInputField({
                   : field.value
               }
               onChange={field.onChange}
-              className="input-phone"
+              className="input-phone rounded-md !border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 !border-gray-300 h-10 w-full min-w-0"
               disabled={disabled}
             />
           </FormControl>

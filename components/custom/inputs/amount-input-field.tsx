@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Control, FieldValues } from "react-hook-form";
+import { Input } from "@/components/ui/input";
 
 interface AmountInputFieldProps {
   control: Control<FieldValues>;
@@ -36,14 +37,14 @@ function AmountInputComponent({
   disabled?: boolean;
 }) {
   return (
-    <input
+    <Input
       type="number"
       value={value}
       onChange={(e) => onChange?.(e.target.value)}
       placeholder={placeholder}
       readOnly={readOnly}
       disabled={disabled}
-      className="shad-input border-0"
+      className="shad-input"
       {...props}
     />
   );
