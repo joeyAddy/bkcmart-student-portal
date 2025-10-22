@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExamScheduleHeader } from "./exam-schedule-header";
 import { MonthView } from "./month-view";
 import { WeekView } from "./week-view";
 import { ListView } from "./list-view";
 import { getWeekDates, SAMPLE_EXAM_DATA, MONTH_NAMES } from "./exam-utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ViewType = "month" | "week" | "list";
 
 export function ExamSchedule() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewType, setViewType] = useState<ViewType>("month");
+  const [userSelectedView, setUserSelectedView] = useState<ViewType>("month");
+  const isMobile = useIsMobile();
+
+  // Automatically switch to list view on mobile, but remember user preference
+  useEffect(() => {
+    if (isMobile) {
+      setViewType("list");
+    } else {
+      setViewType(userSelectedView);
+    }
+  }, [isMobile, userSelectedView]);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -45,7 +57,10 @@ export function ExamSchedule() {
   };
 
   const handleViewTypeChange = (newViewType: ViewType) => {
-    setViewType(newViewType);
+    setUserSelectedView(newViewType);
+    if (!isMobile) {
+      setViewType(newViewType);
+    }
   };
 
   const renderCurrentView = () => {
@@ -70,7 +85,9 @@ export function ExamSchedule() {
         onNavigate={handleNavigate}
         onViewTypeChange={handleViewTypeChange}
       />
-      {renderCurrentView()}
+      <div className={isMobile ? "mobile-schedule-view" : ""}>
+        {renderCurrentView()}
+      </div>
     </div>
   );
 }

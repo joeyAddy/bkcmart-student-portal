@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScheduleHeader } from "./schedule-header";
 import { WeekView } from "./week-view";
 import { DayView } from "./day-view";
 import { AgendaView } from "./agenda-view";
 import { getWeekDates, SAMPLE_SCHEDULE_DATA } from "./schedule-utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ViewType = "week" | "day" | "agenda";
 
 export function WeeklySchedule() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewType, setViewType] = useState<ViewType>("week");
+  const [userSelectedView, setUserSelectedView] = useState<ViewType>("week");
+  const isMobile = useIsMobile();
+
+  // Automatically switch to agenda view on mobile, but remember user preference
+  useEffect(() => {
+    if (isMobile) {
+      setViewType("agenda");
+    } else {
+      setViewType(userSelectedView);
+    }
+  }, [isMobile, userSelectedView]);
 
   const weekDates = getWeekDates(currentDate);
   const monthYear = currentDate.toLocaleDateString("en-US", {
@@ -36,7 +48,10 @@ export function WeeklySchedule() {
   };
 
   const handleViewTypeChange = (newViewType: ViewType) => {
-    setViewType(newViewType);
+    setUserSelectedView(newViewType);
+    if (!isMobile) {
+      setViewType(newViewType);
+    }
   };
 
   const renderCurrentView = () => {
@@ -81,7 +96,9 @@ export function WeeklySchedule() {
         onNavigate={handleNavigate}
         onViewTypeChange={handleViewTypeChange}
       />
-      {renderCurrentView()}
+      <div className={isMobile ? "mobile-schedule-view" : ""}>
+        {renderCurrentView()}
+      </div>
     </div>
   );
 }
